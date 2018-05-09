@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class NavbarComponent {
   isHandset: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Handset);
 
-  appTitle = 'dashUI: A Flexible Angular Dashboarding Tool';
+  appTitle = 'DashUI: A Flexible Angular Dashboarding Tool';
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 }

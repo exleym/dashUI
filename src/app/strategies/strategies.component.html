@@ -1,3 +1,8 @@
-<p>
-  strategies works!
-</p>
+<mat-card>
+  <mat-card-title>Strategies</mat-card-title>
+  <mat-list>
+    <mat-list-item *ngFor="let strategy of strategies">
+      <span>{{strategy.id}} -- {{strategy.name}}</span>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

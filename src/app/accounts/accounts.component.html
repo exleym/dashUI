@@ -1,3 +1,6 @@
-<p>
-  accounts works!
-</p>
+<h1 class="mat-h1">Accounts</h1>
+<mat-list>
+  <mat-list-item *ngFor="let account of accounts">
+    <span>{{account.id}}: {{account.name}}</span>
+  </mat-list-item>
+</mat-list>
