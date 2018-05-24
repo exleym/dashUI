@@ -1,6 +1,11 @@
-<h1 class="mat-h1">Accounts</h1>
-<mat-list>
-  <mat-list-item *ngFor="let account of accounts">
-    <span>{{account.id}}: {{account.name}}</span>
-  </mat-list-item>
-</mat-list>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav class="sidenav" mode="side" opened>
+    <mat-nav-list>
+      <a *ngFor="let account of accounts" mat-list-item href="#" (click)="selectAccount(account)">{{account.code}}</a>
+      <a mat-list-item href="/accounts/new">New Account</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-account-detail *ngIf="selectedAccount" [account]="selectedAccount"></app-account-detail>
+  </mat-sidenav-content>
+</mat-sidenav-container>

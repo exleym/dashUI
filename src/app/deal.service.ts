@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { ApiResponse, Strategy, Tag } from './common/models';
+import { ApiResponse, Deal, Tag } from './common/models';
 import { ResourceService } from './resource-service-interface';
 
 const httpOptions = {
@@ -18,24 +18,24 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class StrategyService implements ResourceService {
+export class DealService implements ResourceService {
 
   /*
-   StrategyService must be injectable anywhere that takes a ResourceService,
+   DealService must be injectable anywhere that takes a ResourceService,
    particularly in TagComponent.
    */
-  resourceUrl = 'http://localhost:8080/api/v1/strategies';
+  resourceUrl = 'http://localhost:8080/api/v1/deals';
 
   constructor(private http: HttpClient) { }
 
-  getResources(): Observable<Strategy[]> {
+  getResources(): Observable<Deal[]> {
     return this.http.get<ApiResponse>(this.resourceUrl, httpOptions).pipe(
       map(res => res.data ),
       catchError(this.handleError('getResources', []))
     );
   }
 
-  searchResource(term: string): Observable<Strategy[]> {
+  searchResource(term: string): Observable<Deal[]> {
     return this.http.get<ApiResponse>(this.resourceUrl + `?search=${term}`, httpOptions)
       .pipe(
         map(res => res.data),
@@ -43,22 +43,22 @@ export class StrategyService implements ResourceService {
       );
   }
 
-  createResource(resource: Strategy): Observable<Strategy> {
+  createResource(resource: Deal): Observable<Deal> {
     return this.http.post<ApiResponse>(this.resourceUrl, resource, httpOptions).pipe(
       map(res => res.data ),
       catchError(this.handleError('createResource', []))
     );
   }
 
-  updateResource(resource: Strategy): Observable<Strategy> {
+  updateResource(resource: Deal): Observable<Deal> {
     return of(resource);
   }
 
-  deleteResource(resource: Strategy): Observable<Strategy> {
+  deleteResource(resource: Deal): Observable<Deal> {
     return of(resource);
   }
 
-  tagResource(resource: Strategy, tag: string): Observable<Strategy> {
+  tagResource(resource: Deal, tag: string): Observable<Deal> {
     const url = this.resourceUrl + `/${resource.id}/tags`;
     const tagPackage = {name: tag};
     return this.http.post<ApiResponse>(url, tagPackage, httpOptions).pipe(
@@ -67,14 +67,14 @@ export class StrategyService implements ResourceService {
     );
   }
 
-  getResourceTags(resource: Strategy): Observable<Tag[]> {
+  getResourceTags(resource: Deal): Observable<Tag[]> {
     return this.http.get<ApiResponse>(this.resourceUrl + `/${resource.id}/tags`, httpOptions).pipe(
       map(res => res.data),
       catchError(this.handleError('getResourceTags', []))
     );
   }
 
-  untagResource(resource: Strategy, tag: Tag): Observable<Strategy> {
+  untagResource(resource: Deal, tag: Tag): Observable<Deal> {
     return this.http.delete<ApiResponse>(this.resourceUrl + `/${resource.id}/tags/${tag.id}`).pipe(
       map(res => res.data),
       catchError(this.handleError('untagResource', []))

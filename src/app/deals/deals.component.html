@@ -1,10 +1,10 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav class="sidenav" mode="side" opened>
     <mat-nav-list>
-      <a *ngFor="let strategy of strategies" mat-list-item href="#" (click)="selectStrategy(strategy)">{{strategy.code}}</a>
+      <a *ngFor="let deal of deals" mat-list-item href="#" (click)="selectDeal(deal)">{{deal.code}}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-strategy-detail *ngIf="selectedStrategy" [strategy]="selectedStrategy"></app-strategy-detail>
+    <app-deal-detail *ngIf="selectedDeal" [deal]="selectedDeal"></app-deal-detail>
   </mat-sidenav-content>
 </mat-sidenav-container>

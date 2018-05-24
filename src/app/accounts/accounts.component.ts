@@ -10,17 +10,25 @@ import { AccountService } from '../account.service';
 })
 export class AccountsComponent implements OnInit {
 
-  accounts: Account[];
+  accounts = [];
+  selectedAccount: Account;
 
   constructor(private accountService: AccountService) { }
 
   ngOnInit() {
     this.getAccounts();
+    this.selectedAccount = this.accounts[0];
   }
 
   getAccounts(): void {
-    this.accountService.getAccounts()
+    this.accountService.getResources()
       .subscribe(accounts => this.accounts = accounts);
+    console.log(this.accounts);
   }
 
+  selectAccount(account: Account) {
+    console.log(`selecting account ${account.code}`);
+    this.selectedAccount = account;
+    return false;
+  }
 }
